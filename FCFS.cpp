@@ -1,0 +1,33 @@
+ 
+#include <stdio.h>
+int main( )
+{
+char p[10][10];
+int bt[10],wt[10],tat[10],i,n;
+float avgwt,avgtat;
+printf("Enter no of processes: ");
+scanf("%d",&n);
+for(i=0;i<n;i++)
+{
+printf("Enter process %d name:\t",i+1);
+scanf("%s",p[i]);
+printf("Enter burst time : \t");
+scanf("%d",&bt[i]);
+}
+wt[0]=avgwt=0;
+avgtat=tat[0]=bt[0];
+for(i=1;i<n;i++)
+{
+wt[i]=wt[i-1]+bt[i-1];
+tat[i]=wt[i]+bt[i];
+avgwt=avgwt+wt[i];
+avgtat=avgtat+tat[i];
+}
+printf("P_name\tB_time\tW_time\tTAT\n");
+for(i=0;i<n;i++) {
+	printf("%s\t%d\t%d\t%d\n",p[i],bt[i],wt[i],tat[i]);
+}
+printf("\nAvg Waiting Time=%f", avgwt/n);
+printf("\nAvg TAT time=%f\n", avgtat/n);
+return 0;
+}
